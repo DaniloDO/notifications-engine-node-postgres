@@ -21,7 +21,15 @@ class UsersController {
         
     }
 
-    async getUserByEmail(req, res) {}
+    // async getUserByEmail(req, res) {
+    //     try {
+            
+    //     } 
+        
+    //     catch (error) {
+            
+    //     }
+    // }
 
     async getUserById(req, res) {}
 
@@ -32,3 +40,5 @@ class UsersController {
     async deleteUser(req, res) {}
 
 }
+
+export default UsersController; 

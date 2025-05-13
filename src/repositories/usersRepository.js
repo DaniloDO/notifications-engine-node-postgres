@@ -6,16 +6,16 @@ class UsersRepository {
 
     async createUser(userData) {
         try {
-            const { firstName, lastName, email, password, createdAt } = userData;
+            const { firstName, lastName, email, password } = userData;
 
             const query = `
-            INSERT INTO users (first_name, last_name, email, user_password, created_at)
-            VALUES($1, $2, $3, $4)
+            INSERT INTO users (first_name, last_name, email, user_password)
+            VALUES($1, $2, $3, $4 )
             RETURNING *; 
             `; 
-            const values = [firstName, lastName, email, password, createdAt]; 
-    
-            const { rows } = await this.postgresClient.query(query, values); 
+            const values = [firstName, lastName, email, password]; 
+            
+            const { rows } = await this.postgresClient.pool.query(query, values); 
     
             return rows[0]; 
         } 
@@ -29,7 +29,23 @@ class UsersRepository {
         
     }
 
-    async getUserByEmail(userEmail) {}
+    // async getUserByEmail(userEmail) {
+    //     try {
+    //         const query = `
+    //         SELECT * FROM users WHERE email = $1; 
+    //         `; 
+    //         const values = [ userEmail ]; 
+        
+    //         const rows = await this.postgresClient.pool.query(query, values); 
+        
+    //         return rows[0];
+    //     } 
+        
+    //     catch (error) {
+    //         console.error("Error in user UsersRepository getting user by email:", error.message); 
+    //         throw error;    
+    //     }
+    // }
 
     async getUserById(userId) {}
 
