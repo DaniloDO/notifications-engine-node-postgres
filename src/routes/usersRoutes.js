@@ -11,6 +11,8 @@ const usersRepository = new UsersRepository(postgresClient);
 const usersService = new UsersService(usersRepository); 
 const usersController = new UsersController(usersService); 
 
-usersRouter.post("/create-user", (req, res) => usersController.createUser(req, res)); 
+usersRouter.post("/create-user", (req, res) => usersController.createUser(req, res));
+
+usersRouter.get("/email-user/:userEmail", (req, res) => usersController.getUserByEmail(req, res)); 
 
 export default usersRouter; 

@@ -29,23 +29,23 @@ class UsersRepository {
         
     }
 
-    // async getUserByEmail(userEmail) {
-    //     try {
-    //         const query = `
-    //         SELECT * FROM users WHERE email = $1; 
-    //         `; 
-    //         const values = [ userEmail ]; 
+    async getUserByEmail(userEmail) {
+        try {
+            const query = `
+            SELECT * FROM users WHERE email = $1; 
+            `; 
+            const values = [ userEmail ]; 
+            
+            const { rows } = await this.postgresClient.pool.query(query, values); 
+            
+            return rows[0];
+        } 
         
-    //         const rows = await this.postgresClient.pool.query(query, values); 
-        
-    //         return rows[0];
-    //     } 
-        
-    //     catch (error) {
-    //         console.error("Error in user UsersRepository getting user by email:", error.message); 
-    //         throw error;    
-    //     }
-    // }
+        catch (error) {
+            console.error("Error in user UsersRepository getting user by email:", error.message); 
+            throw error;    
+        }
+    }
 
     async getUserById(userId) {}
 

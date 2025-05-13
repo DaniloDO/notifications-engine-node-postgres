@@ -18,18 +18,18 @@ class UsersService {
 
     }
 
-    // async getUserByEmail(userEmail) {
-    //     try {
-    //         const user = await this.usersRepository.getUserByEmail(userEmail); 
+    async getUserByEmail(userEmail) {
+        try {
+            const user = await this.usersRepository.getUserByEmail(userEmail); 
 
-    //         return user; 
-    //     } 
+            return user; 
+        } 
         
-    //     catch (error) {
-    //         console.error('Error in UsersService creating user:', error.message);
-    //         throw error;
-    //     }
-    // }
+        catch (error) {
+            console.error('Error in UsersService getting user by email:', error.message);
+            throw error;
+        }
+    }
 
     async getUserById(userId) {}
 
