@@ -21,15 +21,29 @@ class UsersController {
         
     }
 
-    // async getUserByEmail(req, res) {
-    //     try {
+    async getUserByEmail(req, res) {
+        try {
+            const { userEmail } = req.params; 
             
-    //     } 
+            const user = await this.usersService.getUserByEmail(userEmail); 
+            if(!user){
+                res.status(404).json({error: "User not found."});
+            }
+
+            const publicUser = {
+                firstName: user.first_name,
+                lastName: user.last_name,
+                userEmail: user.email 
+            };
+
+            return res.status(200).json(publicUser); 
+        } 
         
-    //     catch (error) {
-            
-    //     }
-    // }
+        catch (error) {
+            console.error('Error in usersController handling getUserByEmail', error.message);
+            res.status(400).json({message: 'Unable to find user'}); 
+        }
+    }
 
     async getUserById(req, res) {}
 
