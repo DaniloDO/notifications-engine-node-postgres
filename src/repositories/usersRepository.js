@@ -32,10 +32,10 @@ class UsersRepository {
     async getUserByEmail(userEmail) {
         try {
             const query = `
-            SELECT * FROM users WHERE email = $1; 
+                SELECT * FROM users WHERE email = $1; 
             `; 
             const values = [ userEmail ]; 
-            
+
             const { rows } = await this.postgresClient.pool.query(query, values); 
             
             return rows[0];
@@ -47,7 +47,23 @@ class UsersRepository {
         }
     }
 
-    async getUserById(userId) {}
+    async getUserById(userId) {
+        try {
+            const query = `
+                SELECT * FROM users WHERE id = $1;
+            `;
+            const values = [ userId ]; 
+            
+            const { rows } = await this.postgresClient.pool.query(query, values);
+            
+            return rows[0]; 
+        } 
+        
+        catch (error) {
+            console.error("Error in user UsersRepository getting user by id:", error.message); 
+            throw error;  
+        }
+    }
 
     async getAllUsers() {}
 

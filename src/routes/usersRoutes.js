@@ -15,4 +15,6 @@ usersRouter.post("/create-user", (req, res) => usersController.createUser(req, r
 
 usersRouter.get("/email-user/:userEmail", (req, res) => usersController.getUserByEmail(req, res)); 
 
+usersRouter.get("/id-user/:userId", (req, res) => usersController.getUserById(req, res)); 
+
 export default usersRouter; 

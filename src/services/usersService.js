@@ -31,7 +31,18 @@ class UsersService {
         }
     }
 
-    async getUserById(userId) {}
+    async getUserById(userId) {
+        try {
+            const user = await this.usersRepository.getUserById(userId); 
+
+            return user; 
+        } 
+        
+        catch (error) {
+            console.error('Error in UsersService getting user by id:', error.message);
+            throw error;
+        }
+    }
 
     async getAllUsers() {}
 
