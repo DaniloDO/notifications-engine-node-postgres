@@ -17,4 +17,6 @@ usersRouter.get("/email-user/:userEmail", (req, res) => usersController.getUserB
 
 usersRouter.get("/id-user/:userId", (req, res) => usersController.getUserById(req, res)); 
 
+usersRouter.put("/update-user/:userId", (req, res) => usersController.updateUser(req, res)); 
+
 export default usersRouter; 

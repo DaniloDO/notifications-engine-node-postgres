@@ -71,7 +71,24 @@ class UsersController {
 
     async getAllUsers(req, res) {}
 
-    async updateUser(req, res) {}
+    async updateUser(req, res) {
+        try {
+            const { userId } = req.params; 
+            const userData = req.body; 
+
+            const user = await this.usersService.updateUser(userId, userData); 
+            if(!user){
+                return res.status(404).json({message: "User not found"}); 
+            }
+
+            res.status(200).json({ message: 'User updated successfully', user: user });
+        } 
+        
+        catch (error) {
+            console.error('Error in userController handling updateUser', error.message);
+            res.status(400).json({message: 'Unable to update user'});   
+        }
+    }
 
     async deleteUser(req, res) {}
 
