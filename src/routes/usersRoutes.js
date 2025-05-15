@@ -19,4 +19,6 @@ usersRouter.get("/id-user/:userId", (req, res) => usersController.getUserById(re
 
 usersRouter.put("/update-user/:userId", (req, res) => usersController.updateUser(req, res)); 
 
+usersRouter.delete("/delete-user/:userId", (req, res) => usersController.deleteUser(req, res)); 
+
 export default usersRouter; 

@@ -82,8 +82,6 @@ class UsersRepository {
             `; 
 
             const values = [ firstName, lastName, email, password, userId ]; 
-            console.log(query); 
-            console.log(values); 
 
             const { rows } = await this.postgresClient.pool.query(query, values);
             
@@ -96,7 +94,23 @@ class UsersRepository {
         }
     }
 
-    async deleteUser(userId) {}
+    async deleteUser(userId) {
+        const query = `
+        DELETE FROM users WHERE id = $1
+        RETURNING *;
+        `;
+        const values = [userId]; 
+
+        try {
+            const { rows } = await this.postgresClient.pool.query(query, values); 
+            return rows[0]; 
+        } 
+        
+        catch (error) {
+            console.error("Error in UserRepository deleting user", error.message);
+            throw error; 
+        }
+    }
 }
 
 export default UsersRepository; 

@@ -59,7 +59,17 @@ class UsersService {
         }
     }
 
-    async deleteUser(userId) {}
+    async deleteUser(userId) {
+        try {
+            const response = await this.usersRepository.deleteUser(userId); 
+            return response; 
+        } 
+        
+        catch (error) {
+            console.error('Error in UserService deleting user:', error.message);
+            throw error;
+        }
+    }
 }
 
 export default UsersService; 
