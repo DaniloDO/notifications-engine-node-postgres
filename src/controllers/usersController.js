@@ -15,7 +15,7 @@ class UsersController {
         
         catch (error) {
             console.error("Error in UsersControllers handling user creation.", error.message); 
-            res.status(400).json({message: "Unable to create new user"}); 
+            res.status(400).json({error: "Unable to create new user"}); 
         }
 
         
@@ -41,7 +41,7 @@ class UsersController {
         
         catch (error) {
             console.error('Error in usersController handling getUserByEmail', error.message);
-            res.status(400).json({message: 'Unable to find user'}); 
+            res.status(400).json({error: 'Unable to find user'}); 
         }
     }
 
@@ -65,7 +65,7 @@ class UsersController {
         
         catch (error) {
             console.error('Error in usersController handling getUserById', error.message);
-            res.status(400).json({message: 'Unable to find user'}); 
+            res.status(400).json({error: 'Unable to find user'}); 
         }
     }
 
@@ -78,7 +78,7 @@ class UsersController {
 
             const user = await this.usersService.updateUser(userId, userData); 
             if(!user){
-                return res.status(404).json({message: "User not found"}); 
+                return res.status(404).json({error: "User not found"}); 
             }
 
             res.status(200).json({ message: 'User updated successfully', user: user });
@@ -86,11 +86,27 @@ class UsersController {
         
         catch (error) {
             console.error('Error in userController handling updateUser', error.message);
-            res.status(400).json({message: 'Unable to update user'});   
+            res.status(400).json({error: 'Unable to update user'});   
         }
     }
 
-    async deleteUser(req, res) {}
+    async deleteUser(req, res) {
+        const { userId } = req.params;
+        
+        try {
+            const response = await this.usersService.deleteUser(userId); 
+            if(!response){
+                return res.status(404).json({error: "User not found."})
+            }
+            
+            res.status(200).json({message: "User deleted successfully"}); 
+        } 
+        
+        catch (error) {
+            console.error('Error in userController handling deleteUser', error.message);
+            res.status(400).json({message: 'Unable to delete user'}); 
+        }
+    }
 
 }
 
