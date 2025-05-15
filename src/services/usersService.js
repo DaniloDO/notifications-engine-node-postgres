@@ -46,7 +46,18 @@ class UsersService {
 
     async getAllUsers() {}
 
-    async updateUser(userId, userData) {}
+    async updateUser(userId, userData) {
+        try {
+        const user = await this.usersRepository.updateUser(userId, userData); 
+
+        return user; 
+        } 
+        
+        catch (error) {
+            console.error('Error in UserService updating user:', error.message);
+            throw error;
+        }
+    }
 
     async deleteUser(userId) {}
 }
