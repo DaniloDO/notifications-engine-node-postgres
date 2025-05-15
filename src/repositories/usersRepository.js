@@ -67,7 +67,34 @@ class UsersRepository {
 
     async getAllUsers() {}
 
-    async updateUser(userId, userData) {}
+    async updateUser(userId, userData) {
+        const { firstName, lastName, email, password } = userData; 
+
+        try {
+            const query = `
+                UPDATE users 
+                SET first_name = $1,
+                    last_name = $2,
+                    email = $3,
+                    user_password = $4
+                WHERE id = $5
+                RETURNING *; 
+            `; 
+
+            const values = [ firstName, lastName, email, password, userId ]; 
+            console.log(query); 
+            console.log(values); 
+
+            const { rows } = await this.postgresClient.pool.query(query, values);
+            
+            return rows[0]; 
+        } 
+        
+        catch (error) {
+            console.error('Error in UserRepository updating user data:', error.message);
+            throw error;  
+        }
+    }
 
     async deleteUser(userId) {}
 }
