@@ -72,10 +72,10 @@ class UsersController {
     async getAllUsers(req, res) {}
 
     async updateUser(req, res) {
-        try {
-            const { userId } = req.params; 
-            const userData = req.body; 
+        const { userId } = req.params; 
+        const userData = req.body; 
 
+        try {
             const user = await this.usersService.updateUser(userId, userData); 
             if(!user){
                 return res.status(404).json({error: "User not found"}); 
