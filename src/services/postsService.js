@@ -1,12 +1,21 @@
 
 class PostsService {
-    constructor(postsRepository) {
+    constructor(postsRepository, eventsService) {
         this.postsRepository = postsRepository; 
+        this.eventsService = eventsService; 
     }
 
     async createPost(postData) {
         try {
-            const post = await this.postsRepository.createPost(postData); 
+            const post = await this.postsRepository.createPost(postData);
+
+            await this.eventsService.recordEvent({
+                eventType: "NEW_POST",
+                entityType: "post",
+                entityId: post.id,
+                actorId: post.user_id
+            }); 
+
             return post;     
         } 
         
