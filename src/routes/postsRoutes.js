@@ -6,11 +6,15 @@ import PostsRepository from "../repositories/postsRepository.js";
 import PostsService from "../services/postsService.js";
 import PostsController from "../controllers/postsController.js";
 
+import EventsService from "../services/eventsService.js";
+
+import { postsController } from "../container/container.js";
+
 const postsRouter = express.Router(); 
 
-const postsRepository = new PostsRepository(postgresClient); 
-const postsService = new PostsService(postsRepository); 
-const postsController = new PostsController(postsService); 
+// const postsRepository = new PostsRepository(postgresClient); 
+// const postsService = new PostsService(postsRepository, eventsService); 
+// const postsController = new PostsController(postsService); 
 
 postsRouter.post("/create-post", (req, res) => postsController.createPost(req, res)); 
 
