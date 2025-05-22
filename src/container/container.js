@@ -8,6 +8,10 @@ import PostsRepository from "../repositories/postsRepository.js";
 import PostsService from "../services/postsService.js";
 import PostsController from "../controllers/postsController.js";
 
+import CommentsRepository from "../repositories/commentsRepository.js";
+import CommentsService from "../services/commentsService.js";
+import CommentsController from "../controllers/commentsController.js"; 
+
 import EventsRepository from "../repositories/eventsRepository.js";
 import EventsService from "../services/eventsService.js";
 
@@ -21,5 +25,9 @@ export const usersController = new UsersController(usersService);
 export const postsRepository = new PostsRepository(postgresClient); 
 export const postsService = new PostsService(postsRepository, eventsService); 
 export const postsController = new PostsController(postsService); 
+
+export const commentsRepository = new CommentsRepository(postgresClient); 
+export const commentsService = new CommentsService(commentsRepository, eventsService); 
+export const commentsController = new CommentsController(commentsService); 
 
  

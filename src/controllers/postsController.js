@@ -13,7 +13,7 @@ class PostsController {
         } 
         
         catch (error) {
-            console.error("Error in PostsControllers handling post creation.", error.message); 
+            console.error("Error in PostsController handling post creation.", error.message); 
             res.status(400).json({error: "Unable to create new post"});    
         }
 

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import postgresClient from "./src/database/config/postgresClient.js";
 import usersRouter from "./src/routes/usersRoutes.js";
 import postsRouter from "./src/routes/postsRoutes.js";
+import commentsRouter from "./src/routes/commentsRoutes.js";
 
 const app = express(); 
 const environment = process.env.NODE_ENV || "development"; 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true})); 
 app.use("/api/users", usersRouter); 
 app.use("/api/posts", postsRouter);
+app.use("/api/comments", commentsRouter); 
 
 app.set("json spaces", 2); 
 
