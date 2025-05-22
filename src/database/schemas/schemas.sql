@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS comments(
     user_id INTEGER,
     CONSTRAINT fk_comments_users
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    posts_id INTEGER,
+    post_id INTEGER,
     CONSTRAINT fk_comments_posts
-        FOREIGN KEY (posts_id) REFERENCES posts(id) ON DELETE CASCADE
+        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
 ); 
 
 CREATE TABLE IF NOT EXISTS events(

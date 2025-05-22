@@ -14,7 +14,7 @@ class UsersController {
         } 
         
         catch (error) {
-            console.error("Error in UsersControllers handling user creation.", error.message); 
+            console.error("Error in UsersController handling user creation.", error.message); 
             res.status(400).json({error: "Unable to create new user"}); 
         }
 
